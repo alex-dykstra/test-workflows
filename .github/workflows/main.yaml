@@ -15,12 +15,14 @@ jobs:
         -  name: Fake deploy step
            run: echo "Deploying to dev..."
   deploy-test:
+    needs: deploy-dev
     environment: test
     runs-on: ubuntu-latest
     steps:
         -  name: Fake deploy step
            run: echo "Deploying to test..."
   deploy-prod:
+    needs: deploy-test
     environment: prod
     runs-on: ubuntu-latest
     steps:
