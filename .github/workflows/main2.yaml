@@ -1,0 +1,17 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches:
+      - main
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [dev, test, prod] # Define your environments here
+    steps:
+      - name: Deploy to ${{ matrix.environment }}
+        run: |
+          echo "Deploying to ${{ matrix.environment }} environment..."
