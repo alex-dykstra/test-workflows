@@ -7,7 +7,6 @@ jobs:
     environment: dev
     concurrency:
       group: deploy-dev
-      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
         -  name: Fake deploy step
@@ -17,7 +16,6 @@ jobs:
     environment: test
     concurrency:
       group: deploy-test
-      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
         -  name: Fake deploy step
@@ -26,7 +24,6 @@ jobs:
     needs: deploy-test
     concurrency:
       group: deploy-prod
-      cancel-in-progress: true
     environment: prod
     runs-on: ubuntu-latest
     steps:
