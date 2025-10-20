@@ -25,7 +25,7 @@ jobs:
   deploy-prod:
     needs: deploy-test
     environment: 
-      name: prod
+      name: production
       url: https://prod.example.com
     runs-on: ubuntu-latest
     steps:
