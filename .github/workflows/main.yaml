@@ -1,0 +1,28 @@
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-dev:
+    environment: dev
+    runs-on: ubuntu-latest
+    steps:
+        -  name: Fake deploy step
+           run: echo "Deploying to dev..."
+  deploy-test:
+    environment: test
+    runs-on: ubuntu-latest
+    steps:
+        -  name: Fake deploy step
+           run: echo "Deploying to test..."
+  deploy-prod:
+    environment: prod
+    runs-on: ubuntu-latest
+    steps:
+        -  name: Fake deploy step
+           run: echo "Deploying to production..."
