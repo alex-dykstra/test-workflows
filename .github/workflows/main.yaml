@@ -2,14 +2,12 @@ on:
   push:
     branches:
       - main
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   deploy-dev:
     environment: dev
+    concurrency:
+      group: deploy-dev
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
         -  name: Fake deploy step
@@ -17,12 +15,18 @@ jobs:
   deploy-test:
     needs: deploy-dev
     environment: test
+    concurrency:
+      group: deploy-test
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
         -  name: Fake deploy step
            run: echo "Deploying to test..."
   deploy-prod:
     needs: deploy-test
+    concurrency:
+      group: deploy-prod
+      cancel-in-progress: true
     environment: prod
     runs-on: ubuntu-latest
     steps:
