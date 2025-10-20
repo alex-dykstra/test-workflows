@@ -1,0 +1,37 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-dev:
+    environment: 
+      name: dev
+      url: https://dev.example.com
+    concurrency:
+      group: deploy-dev
+    runs-on: ubuntu-latest
+    steps:
+        -  name: Fake deploy step
+           run: echo "Deploying to dev..."
+  deploy-test:
+    needs: deploy-dev
+    environment: 
+      name: test
+      url: https://test.example.com
+    concurrency:
+      group: deploy-test
+    runs-on: ubuntu-latest
+    steps:
+        -  name: Fake deploy step
+           run: echo "Deploying to test..."
+  deploy-prod:
+    needs: deploy-test
+    concurrency:
+      group: deploy-prod
+    environment: 
+      name: prod
+      url: https://prod.example.com
+    runs-on: ubuntu-latest
+    steps:
+        -  name: Fake deploy step
+           run: echo "Deploying to production..."
